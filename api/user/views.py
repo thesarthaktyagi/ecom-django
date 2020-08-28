@@ -1,5 +1,7 @@
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
+from rest_framework.views import APIView
+from rest_framework.decorators import api_view, permission_classes
 from .serializers import UserSerializer
 from .models import CustomUser
 from django.http import JsonResponse
@@ -72,11 +74,14 @@ def signout(request, id):
     return JsonResponse({'success': 'Logout success'})
 
 
+# @api_view(['POST'])
 class UserViewSet(viewsets.ModelViewSet):
+
     permission_classes_by_action = {'create': [AllowAny]}
 
     queryset = CustomUser.objects.all().order_by('id')
     serializer_class = UserSerializer
+    print(serializer_class.__dict__)
 
     def get_permissions(self):
         try:
