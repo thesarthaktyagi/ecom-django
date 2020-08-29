@@ -81,7 +81,6 @@ class UserViewSet(viewsets.ModelViewSet):
 
     queryset = CustomUser.objects.all().order_by('id')
     serializer_class = UserSerializer
-    print(serializer_class.__dict__)
 
     def get_permissions(self):
         try:
